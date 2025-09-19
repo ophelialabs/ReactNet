@@ -19,20 +19,20 @@ RUN apt-get -y install nodejs
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ReactFullStackTS.Server/ReactFullStackTS.Server.csproj", "ReactFullStackTS.Server/"]
-COPY ["reactfullstackts.client/reactfullstackts.client.esproj", "reactfullstackts.client/"]
-RUN dotnet restore "./ReactFullStackTS.Server/ReactFullStackTS.Server.csproj"
+COPY ["React.Server/React.Server.csproj", "React.Server/"]
+COPY ["react.client/react.client.esproj", "react.client/"]
+RUN dotnet restore "./React.Server/React.Server.csproj"
 COPY . .
-WORKDIR "/src/ReactFullStackTS.Server"
-RUN dotnet build "./ReactFullStackTS.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/React.Server"
+RUN dotnet build "./React.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./ReactFullStackTS.Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./React.Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ReactFullStackTS.Server.dll"]
+ENTRYPOINT ["dotnet", "React.Server.dll"]

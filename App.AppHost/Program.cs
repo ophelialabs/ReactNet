@@ -2,7 +2,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var cache = builder.AddRedis("cache");
 
-builder.AddProject<Projects.ReactFullStackTS_Server>("reactfullstackts-server");
+builder.AddProject<Projects.React_Server>("react-server");
 
 var apiService = builder.AddProject<Projects.AspireApp_ApiService>("apiservice")
     .WithHttpHealthCheck("/health");

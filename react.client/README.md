@@ -1,4 +1,5 @@
 # React + TypeScript + Vite + Container Support
+npm install --save-dev @types/react
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

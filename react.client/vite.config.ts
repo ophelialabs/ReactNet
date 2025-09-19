@@ -12,7 +12,7 @@ const baseFolder =
         ? `${env.APPDATA}/ASP.NET/https`
         : `${env.HOME}/.aspnet/https`;
 
-const certificateName = "reactfullstackts.client";
+const certificateName = "react.client";
 const certFilePath = path.join(baseFolder, `${certificateName}.pem`);
 const keyFilePath = path.join(baseFolder, `${certificateName}.key`);
 
@@ -34,7 +34,7 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
     }
 }
 
-const target = env["services__reactfullstackts-server__https__0"] ?? 'https://localhost:7161';
+const target = env["services__react-server__https__0"] ?? 'https://localhost:7161';
 
 // https://vitejs.dev/config/
 export default defineConfig({
